@@ -54,3 +54,21 @@ document.getElementById('getUnitBtn').addEventListener('click', () => {
   const unitId = document.getElementById('unitIdInput').value;
   console.log(getUnit(unitId));
 });
+function displayUnits() {
+    const unitsList = document.getElementById('unitsList');
+    unitsList.innerHTML = ''; // Clear previous list
+  
+    const units = getAllUnits().units; // Get units from your API
+    units.forEach(unit => {
+      const unitCard = document.createElement('div');
+      unitCard.classList.add('unit-card');
+      unitCard.innerHTML = `
+        <h3>${unit.unit_num}</h3>
+        <p>Project: ${unit.project_name}</p>
+        <p>Zone: ${unit.zone}</p>
+        <p>Price: ${unit.price}</p>
+        <button onclick="showUnitDetails(${unit.id})">View Details</button> 
+      `;
+      unitsList.appendChild(unitCard);
+    });
+  }
